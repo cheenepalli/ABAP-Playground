@@ -1,0 +1,26 @@
+REPORT Student.
+TYPES: BEGIN OF ty_class_table,
+  class_id    TYPE i,
+  class_marks TYPE i,
+  END OF ty_class_table.
+  
+DATA: lt_class_table TYPE TABLE OF ty_class_table.
+  
+CLASS lcl_student DEFINITION.
+  PUBLIC SECTION.
+  CLASS-DATA: student_id  TYPE i,
+              class_table TYPE TABLE OF ty_class_table.
+  
+  METHODS: constructor 
+                IMPORTING iv_student_i TYPE i
+                           it_cls_tab TYPE TABLE OF ty_class_table.
+                                                           
+ENDCLASS.
+
+CLASS lcl_student IMPLEMENTATION.
+METHOD constructor.
+    " Initialize student ID and class table
+    student_id = iv_student_id.
+    class_table = it_class_table.
+  ENDMETHOD.
+ENDCLASS.
